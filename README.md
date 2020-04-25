@@ -2,7 +2,7 @@
 A DS1307 real-time clock library written with STM32 HAL.
 
 # To test
-Minimal setup:
+* Minimal setup:
 ```
                                              _________
                        32.768 kHz XTAL1 1 --| o       |-- 8 VCC (3V3)
@@ -12,4 +12,4 @@ Minimal setup:
  
  ```
 * Complie and download example.
-* Refer to datasheets for further information.
+* Refer to datasheet for further information.
