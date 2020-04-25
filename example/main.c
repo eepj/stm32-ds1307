@@ -105,6 +105,14 @@ int main(void) {
 	/* USER CODE BEGIN 2 */
 	const char *DAYS_OF_WEEK[7] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 	DS1307_Init(&hi2c1);
+	DS1307_SetTimeZone(+8, 00);
+	DS1307_SetDate(31);
+	DS1307_SetMonth(12);
+	DS1307_SetYear(2019);
+	DS1307_SetDayOfWeek(2);
+	DS1307_SetHour(23);
+	DS1307_SetMinute(59);
+	DS1307_SetSecond(00);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
