@@ -3,7 +3,7 @@ A DS1307 real-time clock library written with STM32 HAL.
 
 # To test
 Minimal setup:
-```Ruby
+```
                                              _________
                        32.768 kHz XTAL1 1 --| o       |-- 8 VCC (3V3)
                        32.768 kHz XTAL2 2 --|         |-- 7 N/C
