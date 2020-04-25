@@ -11,5 +11,5 @@ A DS1307 real-time clock library written with STM32 HAL.
                                     GND 4 --|_________|-- 7 SDA (PB7 for STM32F030K6)
  
  ```
-* Complie and download example.
+* Complie and download `main.c` in [./example](./example).
 * Refer to datasheet for further information.
