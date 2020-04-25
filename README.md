@@ -12,4 +12,4 @@ An STM32 HAL library written for the DS1307 real-time clock IC.
  
  ```
 * Complie and flash `main.c` in [./examples](./examples) to microcontroller.
-* Refer to datasheet for further information.
+* Refer to datasheets for further information.
