@@ -112,11 +112,11 @@ int main(void) {
 	DS1307_SetTimeZone(+8, 00);
 	DS1307_SetDate(29);
 	DS1307_SetMonth(2);
-	DS1307_SetYear(2020);
-	DS1307_SetDayOfWeek(6);
+	DS1307_SetYear(2024);
+	DS1307_SetDayOfWeek(4);
 	DS1307_SetHour(23);
 	DS1307_SetMinute(59);
-	DS1307_SetSecond(30);
+	DS1307_SetSecond(50);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -132,8 +132,8 @@ int main(void) {
 		uint8_t second = DS1307_GetSecond();
 		int8_t zone_hr = DS1307_GetTimeZoneHour();
 		uint8_t zone_min = DS1307_GetTimeZoneMin();
-		char buffer[60] = { 0 };
-		sprintf(buffer, "ISO8601 FORMAT: %04d-%02d-%02dT%02d:%02d:%02d%+03d:%02d\t%s\n",
+		char buffer[100] = { 0 };
+		sprintf(buffer, "ISO8601 FORMAT: %04d-%02d-%02dT%02d:%02d:%02d%+03d:%02d  %s\n",
 				year, month, date, hour, minute, second, zone_hr, zone_min, DAYS_OF_WEEK[dow]);
 		/* May show warning below. Ignore and proceed. */
 		HAL_UART_Transmit(&huart1, buffer, strlen(buffer), 1000);
