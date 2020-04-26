@@ -1,4 +1,4 @@
-# ds1307_for_stm32_hal
+# DS1307_For_STM32_HAL
 An STM32 HAL library written for the DS1307 real-time clock IC.
 
 ## To test
