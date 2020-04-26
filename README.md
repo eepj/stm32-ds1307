@@ -16,5 +16,5 @@ An STM32 HAL library written for the DS1307 real-time clock IC.
 * Read the results from a UART monitor.
 * Refer to datasheets for further information.
 
-<!--## Known bugs--!>
-<!--* Clock crashes when it reaches mindnight on March 1 in any given leap year.--!>
+## Known issues
+Day of week fails to update at mindnight on March 1, 2020.
