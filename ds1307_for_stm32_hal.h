@@ -16,7 +16,7 @@
 #define DS1307_REG_RAM     	0x10
 #define DS1307_TIMEOUT		1000
 /*----------------------------------------------------------------------------*/
-I2C_HandleTypeDef *_ui2c;
+I2C_HandleTypeDef *_ds1307_ui2c;
 
 void DS1307_Init(I2C_HandleTypeDef *hi2c);
 
