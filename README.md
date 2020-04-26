@@ -17,4 +17,4 @@ An STM32 HAL library written for the DS1307 real-time clock IC.
 * Refer to datasheets for further information.
 
 ## Known issues
-* Day of week fails to update at mindnight on March 1, 2020. This does not recur in any other leap year.
+* Day of week fails to update at mindnight on March 1, 2020. This does not appear to recur in any other leap year.
