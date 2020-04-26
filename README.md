@@ -13,7 +13,7 @@ An STM32 HAL library written for the DS1307 real-time clock IC.
  ```
 * In STM32CubeIDE, include [`ds1307_for_stm32_hal.h`](./ds1307_for_stm32_hal.h) and [`ds1307_for_stm32_hal.c`](./ds1307_for_stm32_hal.c).
 * Complie and flash [`main.c`](./examples/main.c) in [./examples](./examples) to microcontroller.
-* Read the result from a UART monitor.
+* Read the results from a UART monitor.
 * Refer to datasheets for further information.
 
 <!--## Known bugs--!>
