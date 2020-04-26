@@ -104,21 +104,25 @@ int main(void) {
 	MX_I2C1_Init();
 	MX_USART1_UART_Init();
 	/* USER CODE BEGIN 2 */
+	/* Lookup table for the days of week. */
 	const char *DAYS_OF_WEEK[7] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+	/* Start DS1307 timing. Pass user I2C handle to function. */
 	DS1307_Init(&hi2c1);
+	/* To test leap year correction. */
 	DS1307_SetTimeZone(+8, 00);
-	DS1307_SetDate(31);
-	DS1307_SetMonth(12);
-	DS1307_SetYear(2019);
-	DS1307_SetDayOfWeek(2);
+	DS1307_SetDate(29);
+	DS1307_SetMonth(2);
+	DS1307_SetYear(2020);
+	DS1307_SetDayOfWeek(6);
 	DS1307_SetHour(23);
 	DS1307_SetMinute(59);
-	DS1307_SetSecond(00);
+	DS1307_SetSecond(30);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
+		/* Get current date and time. */
 		uint8_t date = DS1307_GetDate();
 		uint8_t month = DS1307_GetMonth();
 		uint16_t year = DS1307_GetYear();
@@ -131,6 +135,7 @@ int main(void) {
 		char buffer[60] = { 0 };
 		sprintf(buffer, "ISO8601 FORMAT: %04d-%02d-%02dT%02d:%02d:%02d%+03d:%02d\t%s\n",
 				year, month, date, hour, minute, second, zone_hr, zone_min, DAYS_OF_WEEK[dow]);
+		/* May show warning below. Ignore and proceed. */
 		HAL_UART_Transmit(&huart1, buffer, strlen(buffer), 1000);
 		HAL_Delay(250);
 		/* USER CODE END WHILE */
