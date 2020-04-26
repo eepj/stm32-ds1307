@@ -116,7 +116,7 @@ int main(void) {
 	DS1307_SetDayOfWeek(4);
 	DS1307_SetHour(23);
 	DS1307_SetMinute(59);
-	DS1307_SetSecond(50);
+	DS1307_SetSecond(30);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
