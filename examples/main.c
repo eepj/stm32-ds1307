@@ -19,8 +19,8 @@
  *								 _________
  *		32.768 kHz	XTAL1	1 --| o       |-- 8 VCC (3V3)
  *					XTAL2	2 --|         |-- 7 N/C
- *					N/C		3 --|         |-- 6 SCL (PB6 for STM32F030x6/8/C)
- *					GND		4 --|_________|-- 7 SDA (PB7 for STM32F030x6/8/C)
+ *					N/C		3 --|         |-- 6 SCL1
+ *					GND		4 --|_________|-- 7 SDA1
  *
  *				Refer to datasheets for further information.
  *
@@ -34,6 +34,7 @@
 /* USER CODE BEGIN Includes */
 #include "ds1307_for_stm32_hal.h"
 #include <stdio.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -130,7 +131,7 @@ int main(void) {
 		char buffer[60] = { 0 };
 		sprintf(buffer, "ISO8601 FORMAT: %04d-%02d-%02dT%02d:%02d:%02d%+03d:%02d\t%s\n",
 				year, month, date, hour, minute, second, zone_hr, zone_min, DAYS_OF_WEEK[dow]);
-		HAL_UART_Transmit(&huart1, buffer, sizeof(buffer), 1000);
+		HAL_UART_Transmit(&huart1, buffer, strlen(buffer), 1000);
 		HAL_Delay(250);
 		/* USER CODE END WHILE */
 
