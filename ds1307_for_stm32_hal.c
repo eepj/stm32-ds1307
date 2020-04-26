@@ -6,7 +6,7 @@ extern "C"{
 
 /**
  * @brief Initializes the DS1307 module. Sets clock halt bit to 0 to start timing.
- * @param hi2c User I2C handle.
+ * @param hi2c User I2C handle pointer.
  */
 void DS1307_Init(I2C_HandleTypeDef *hi2c) {
 	_ui2c = hi2c;
