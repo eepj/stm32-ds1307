@@ -106,7 +106,7 @@ int main(void) {
 	/* USER CODE BEGIN 2 */
 	/* Lookup table for the days of week. */
 	const char *DAYS_OF_WEEK[7] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-	/* Start DS1307 timing. Pass user I2C handle to function. */
+	/* Start DS1307 timing. Pass user I2C handle pointer to function. */
 	DS1307_Init(&hi2c1);
 	/* To test leap year correction. */
 	DS1307_SetTimeZone(+8, 00);
