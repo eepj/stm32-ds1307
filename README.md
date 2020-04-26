@@ -5,7 +5,7 @@ An STM32 HAL library written for the DS1307 real-time clock IC.
 * Minimal setup:
 ```
                                              _________
-                       32.768 kHz XTAL1 1 --| o       |-- 8 VCC (3V3)
+                       32.768 kHz XTAL1 1 --| o       |-- 8 VDD
                        32.768 kHz XTAL2 2 --|         |-- 7 N/C
                                     N/C 3 --|         |-- 6 SCL1
                                     GND 4 --|_________|-- 7 SDA1
