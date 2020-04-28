@@ -1,3 +1,5 @@
+/* An STM32 HAL library written for the DS1307 real-time clock IC. */
+/* Library by @eepj www.github.com/eepj */
 #include "ds1307_for_stm32_hal.h"
 #include "main.h"
 #ifdef __cplusplus
