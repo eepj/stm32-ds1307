@@ -206,7 +206,7 @@ void DS1307_SetTimeZone(int8_t hr, uint8_t min) {
  * @return Decoded decimal value.
  */
 uint8_t DS1307_DecodeData(uint8_t bin) {
-	return (((bin & 0b11110000) >> 4) * 10) + (bin & 0b00001111);
+	return (((bin & 0xf0) >> 4) * 10) + (bin & 0x0f);
 }
 
 /**
