@@ -14,7 +14,7 @@ An STM32 HAL library written for the DS1307 real-time clock IC.
 * In STM32CubeIDE, include [`ds1307_for_stm32_hal.h`](./ds1307_for_stm32_hal.h) and [`ds1307_for_stm32_hal.c`](./ds1307_for_stm32_hal.c).
 * Complie and flash [`main.c`](./examples/main.c) in [`./examples`](./examples) to microcontroller.
 * Read the results from a UART monitor.
-* Refer to datasheets for further information.
+* Refer to [datasheets](https://www.maximintegrated.com/en/products/analog/real-time-clocks/DS1307.html) for further information.
 
 ## Known issues
 * Day of week fails to update at mindnight on March 1, 2020. This does not appear to recur in any other leap year.
