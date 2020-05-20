@@ -15,7 +15,8 @@
 #define DS1307_REG_CONTROL 	0x07
 #define DS1307_REG_UTC_HR	0x08
 #define DS1307_REG_UTC_MIN	0x09
-#define DS1307_REG_RAM     	0x10
+#define DS1307_REG_CENT    	0x10
+#define DS1307_REG_RAM   	0x11
 #define DS1307_TIMEOUT		1000
 /*----------------------------------------------------------------------------*/
 extern I2C_HandleTypeDef *_ds1307_ui2c;
@@ -49,7 +50,7 @@ void DS1307_SetMinute(uint8_t minute);
 void DS1307_SetSecond(uint8_t second);
 void DS1307_SetTimeZone(int8_t hr, uint8_t min);
 
-uint8_t DS1307_DecodeData(uint8_t bin);
-uint8_t DS1307_EncodeData(uint8_t dec);
+uint8_t DS1307_DecodeBCD(uint8_t bin);
+uint8_t DS1307_EncodeBCD(uint8_t dec);
 
 #endif

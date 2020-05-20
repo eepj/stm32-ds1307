@@ -61,7 +61,7 @@ uint8_t DS1307_GetRegByte(uint8_t regAddr) {
  * @return Days from last Sunday, 0 to 6.
  */
 uint8_t DS1307_GetDayOfWeek(void) {
-	return DS1307_DecodeData(DS1307_GetRegByte(DS1307_REG_DOW));
+	return DS1307_DecodeBCD(DS1307_GetRegByte(DS1307_REG_DOW));
 }
 
 /**
@@ -69,7 +69,7 @@ uint8_t DS1307_GetDayOfWeek(void) {
  * @return Day of month, 1 to 31.
  */
 uint8_t DS1307_GetDate(void) {
-	return DS1307_DecodeData(DS1307_GetRegByte(DS1307_REG_DATE));
+	return DS1307_DecodeBCD(DS1307_GetRegByte(DS1307_REG_DATE));
 }
 
 /**
@@ -77,7 +77,7 @@ uint8_t DS1307_GetDate(void) {
  * @return Month, 1 to 12.
  */
 uint8_t DS1307_GetMonth(void) {
-	return DS1307_DecodeData(DS1307_GetRegByte(DS1307_REG_MONTH));
+	return DS1307_DecodeBCD(DS1307_GetRegByte(DS1307_REG_MONTH));
 }
 
 /**
@@ -85,7 +85,8 @@ uint8_t DS1307_GetMonth(void) {
  * @return Year, 2000 to 2099.
  */
 uint16_t DS1307_GetYear(void) {
-	return DS1307_DecodeData(DS1307_GetRegByte(DS1307_REG_YEAR)) + 2000;
+	uint16_t cen = DS1307_GetRegByte(DS1307_REG_CENT) * 100;
+	return DS1307_DecodeBCD(DS1307_GetRegByte(DS1307_REG_YEAR)) + cen;
 }
 
 /**
@@ -93,7 +94,7 @@ uint16_t DS1307_GetYear(void) {
  * @return Hour in 24h format, 0 to 23.
  */
 uint8_t DS1307_GetHour(void) {
-	return DS1307_DecodeData(DS1307_GetRegByte(DS1307_REG_HOUR) & 0x3f);
+	return DS1307_DecodeBCD(DS1307_GetRegByte(DS1307_REG_HOUR) & 0x3f);
 }
 
 /**
@@ -101,7 +102,7 @@ uint8_t DS1307_GetHour(void) {
  * @return Minute, 0 to 59.
  */
 uint8_t DS1307_GetMinute(void) {
-	return DS1307_DecodeData(DS1307_GetRegByte(DS1307_REG_MINUTE));
+	return DS1307_DecodeBCD(DS1307_GetRegByte(DS1307_REG_MINUTE));
 }
 
 /**
@@ -109,7 +110,7 @@ uint8_t DS1307_GetMinute(void) {
  * @return Second, 0 to 59.
  */
 uint8_t DS1307_GetSecond(void) {
-	return DS1307_DecodeData(DS1307_GetRegByte(DS1307_REG_SECOND) & 0x7f);
+	return DS1307_DecodeBCD(DS1307_GetRegByte(DS1307_REG_SECOND) & 0x7f);
 }
 
 /**
@@ -135,7 +136,7 @@ uint8_t DS1307_GetTimeZoneMin(void) {
  * @param dayOfWeek Days since last Sunday, 0 to 6.
  */
 void DS1307_SetDayOfWeek(uint8_t dayOfWeek) {
-	DS1307_SetRegByte(DS1307_REG_DOW, DS1307_EncodeData(dayOfWeek));
+	DS1307_SetRegByte(DS1307_REG_DOW, DS1307_EncodeBCD(dayOfWeek));
 }
 
 /**
@@ -143,7 +144,7 @@ void DS1307_SetDayOfWeek(uint8_t dayOfWeek) {
  * @param date Day of month, 1 to 31.
  */
 void DS1307_SetDate(uint8_t date) {
-	DS1307_SetRegByte(DS1307_REG_DATE, DS1307_EncodeData(date));
+	DS1307_SetRegByte(DS1307_REG_DATE, DS1307_EncodeBCD(date));
 }
 
 /**
@@ -151,7 +152,7 @@ void DS1307_SetDate(uint8_t date) {
  * @param month Month, 1 to 12.
  */
 void DS1307_SetMonth(uint8_t month) {
-	DS1307_SetRegByte(DS1307_REG_MONTH, DS1307_EncodeData(month));
+	DS1307_SetRegByte(DS1307_REG_MONTH, DS1307_EncodeBCD(month));
 }
 
 /**
@@ -159,7 +160,8 @@ void DS1307_SetMonth(uint8_t month) {
  * @param year Year, 2000 to 2099.
  */
 void DS1307_SetYear(uint16_t year) {
-	DS1307_SetRegByte(DS1307_REG_YEAR, DS1307_EncodeData(year - 2000));
+	DS1307_SetRegByte(DS1307_REG_CENT, year / 100);
+	DS1307_SetRegByte(DS1307_REG_YEAR, DS1307_EncodeBCD(year % 100));
 }
 
 /**
@@ -167,7 +169,7 @@ void DS1307_SetYear(uint16_t year) {
  * @param hour_24mode Hour in 24h format, 0 to 23.
  */
 void DS1307_SetHour(uint8_t hour_24mode) {
-	DS1307_SetRegByte(DS1307_REG_HOUR, DS1307_EncodeData(hour_24mode & 0x3f));
+	DS1307_SetRegByte(DS1307_REG_HOUR, DS1307_EncodeBCD(hour_24mode & 0x3f));
 }
 
 /**
@@ -175,7 +177,7 @@ void DS1307_SetHour(uint8_t hour_24mode) {
  * @param minute Minute, 0 to 59.
  */
 void DS1307_SetMinute(uint8_t minute) {
-	DS1307_SetRegByte(DS1307_REG_MINUTE, DS1307_EncodeData(minute));
+	DS1307_SetRegByte(DS1307_REG_MINUTE, DS1307_EncodeBCD(minute));
 }
 
 /**
@@ -184,7 +186,7 @@ void DS1307_SetMinute(uint8_t minute) {
  */
 void DS1307_SetSecond(uint8_t second) {
 	uint8_t ch = DS1307_GetClockHalt();
-	DS1307_SetRegByte(DS1307_REG_SECOND, DS1307_EncodeData(second | ch));
+	DS1307_SetRegByte(DS1307_REG_SECOND, DS1307_EncodeBCD(second | ch));
 }
 
 /**
@@ -200,19 +202,19 @@ void DS1307_SetTimeZone(int8_t hr, uint8_t min) {
 
 /**
  * @brief Decodes the raw binary value stored in registers to decimal format.
- * @param bin Binary value retrieved from register, 0 to 255.
+ * @param bin Binary-coded decimal value retrieved from register, 0 to 255.
  * @return Decoded decimal value.
  */
-uint8_t DS1307_DecodeData(uint8_t bin) {
+uint8_t DS1307_DecodeBCD(uint8_t bin) {
 	return (((bin & 0xf0) >> 4) * 10) + (bin & 0x0f);
 }
 
 /**
- * @brief Encodes a decimal number for storage in registers.
+ * @brief Encodes a decimal number to binaty-coded decimal for storage in registers.
  * @param dec Decimal number to encode.
- * @return Encoded binary value.
+ * @return Encoded binary-coded decimal value.
  */
-uint8_t DS1307_EncodeData(uint8_t dec) {
+uint8_t DS1307_EncodeBCD(uint8_t dec) {
 	return (dec % 10 + ((dec / 10) << 4));
 }
 
