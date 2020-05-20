@@ -17,7 +17,7 @@ An STM32 HAL library written for the DS1307 real-time clock IC.
 * Refer to [datasheets](https://www.maximintegrated.com/en/products/analog/real-time-clocks/DS1307.html) for further information.
 
 ## Note
-* Avoid using user RAM registers 0x08 to 0x10 as those are reserved for some functionality in this library.
+* Avoid using user RAM registers 0x08 to 0x10 as those are reserved for this library.
 
 ## Known issues
 * Day of week fails to update at mindnight on March 1, 2020. This does not appear to recur in any other leap year.
