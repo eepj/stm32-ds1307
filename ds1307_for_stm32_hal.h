@@ -21,13 +21,25 @@
 /*----------------------------------------------------------------------------*/
 extern I2C_HandleTypeDef *_ds1307_ui2c;
 
+typedef enum DS1307_Rate{
+	DS1307_1HZ, DS1307_4096HZ, DS1307_8192HZ, DS1307_32768HZ
+} DS1307_Rate;
+
+typedef enum DS1307_SquareWaveEnable{
+	DS1307_DISABLED, DS1307_ENABLED
+} DS1307_SquareWaveEnable;
+
 void DS1307_Init(I2C_HandleTypeDef *hi2c);
 
 void DS1307_SetClockHalt(uint8_t halt);
 uint8_t DS1307_GetClockHalt(void);
 
+
 void DS1307_SetRegByte(uint8_t regAddr, uint8_t val);
 uint8_t DS1307_GetRegByte(uint8_t regAddr);
+
+void DS1307_SetEnableSquareWave(DS1307_SquareWaveEnable mode);
+void DS1307_SetInterruptRate(DS1307_Rate rate);
 
 uint8_t DS1307_GetDayOfWeek(void);
 uint8_t DS1307_GetDate(void);

@@ -57,6 +57,26 @@ uint8_t DS1307_GetRegByte(uint8_t regAddr) {
 }
 
 /**
+ * @brief Toggle square wave output on pin 7.
+ * @param mode DS1307_ENABLED (1) or DS1307_DISABLED (0);
+ */
+void DS1307_SetEnableSquareWave(DS1307_SquareWaveEnable mode){
+	uint8_t controlReg = DS1307_GetRegByte(DS1307_REG_CONTROL);
+	uint8_t newControlReg = (controlReg & ~(1 << 4)) | ((mode & 1) << 4);
+	DS1307_SetRegByte(DS1307_REG_CONTROL, newControlReg);
+}
+
+/**
+ * @brief Set square wave output frequency.
+ * @param rate DS1307_1HZ (0b00), DS1307_4096HZ (0b01), DS1307_8192HZ (0b10) or DS1307_32768HZ (0b11).
+ */
+void DS1307_SetInterruptRate(DS1307_Rate rate){
+	uint8_t controlReg = DS1307_GetRegByte(DS1307_REG_CONTROL);
+	uint8_t newControlReg = (controlReg & ~0x03) | rate;
+	DS1307_SetRegByte(DS1307_REG_CONTROL, newControlReg);
+}
+
+/**
  * @brief Gets the current day of week.
  * @return Days from last Sunday, 0 to 6.
  */
