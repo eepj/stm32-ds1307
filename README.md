@@ -8,7 +8,7 @@ An STM32 HAL library for the DS1307 real-time clock IC.
                        32.768 kHz XTAL1 1 --| o       |-- 8 VDD
                        32.768 kHz XTAL2 2 --|         |-- 7 N/C
                                     N/C 3 --|         |-- 6 SCL1
-                                    GND 4 --|_________|-- 7 SDA1
+                                    GND 4 --|_________|-- 5 SDA1
  
  ```
 * In STM32CubeIDE, include [`ds1307_for_stm32_hal.h`](./ds1307_for_stm32_hal.h) and [`ds1307_for_stm32_hal.c`](./ds1307_for_stm32_hal.c).
