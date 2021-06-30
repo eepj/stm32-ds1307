@@ -22,8 +22,8 @@ void DS1307_Init(I2C_HandleTypeDef *hi2c) {
  * @param halt Clock halt bit to set, 0 or 1. 0 to start timing, 0 to stop.
  */
 void DS1307_SetClockHalt(uint8_t halt) {
-	uint8_t ch = (halt == 0 ? 0x7f : 0xff);
-	DS1307_SetRegByte(DS1307_REG_SECOND, ch & DS1307_GetRegByte(DS1307_REG_SECOND));
+	uint8_t ch = (halt ? 1 << 7 : 0);
+	DS1307_SetRegByte(DS1307_REG_SECOND, ch | (DS1307_GetRegByte(DS1307_REG_SECOND) & 0x7f));
 }
 
 /**
@@ -31,7 +31,7 @@ void DS1307_SetClockHalt(uint8_t halt) {
  * @return Clock halt bit, 0 or 1.
  */
 uint8_t DS1307_GetClockHalt(void) {
-	return DS1307_GetRegByte(DS1307_REG_SECOND) & 0x40 >> 6;
+	return (DS1307_GetRegByte(DS1307_REG_SECOND) & 0x80) >> 7;
 }
 
 /**
